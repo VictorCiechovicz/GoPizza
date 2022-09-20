@@ -1,0 +1,20 @@
+{
+  
+  "extends": "expo/tsconfig.base",
+
+  //configuração para mapeamento de importação esta é a sugunda para antes da configuraçãio no babel.config
+  "compilerOptions": {
+"strict":true,
+"baseUrl": "./",
+"paths": {
+  "@src/*":["./src/*"],
+  "@components/*":["./src/components/*"],
+  "@screens/*":["./src/screens/*"],
+  "@assets/*":["./src/assets/*"]
+}
+
+
+
+
+  }
+}

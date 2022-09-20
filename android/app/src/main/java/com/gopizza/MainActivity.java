@@ -1,4 +1,4 @@
-package com.gopizza;
+package com.GoPizza;
 
 import android.os.Build;
 import android.os.Bundle;
