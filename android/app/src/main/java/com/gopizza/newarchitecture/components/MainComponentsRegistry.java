@@ -1,4 +1,4 @@
-package com.GoPizza.newarchitecture.components;
+package com.gopizza.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

@@ -6,9 +6,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+
     "android": {
-      "package": "com.GoPizza",
-      "googleServicesFile": "./android/app/google-services.json"
+      "package": "com.gopizza",
+      "googleServicesFile": "./google-services.json"
     }
   
   }

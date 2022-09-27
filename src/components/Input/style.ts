@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components/native";
+import styled, {css} from "styled-components";
 import { TextInput } from "react-native";
 
 export type TypeProps= 'primary'|'secondary'

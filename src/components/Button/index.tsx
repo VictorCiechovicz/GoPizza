@@ -1,9 +1,10 @@
 import React from 'react'
-import { RectButtonProps } from 'react-native-gesture-handler'
+
+import { TouchableOpacityProps } from 'react-native'
 
 import { Container, Title, Load, TypeProps } from './style'
 
-type Props = RectButtonProps & {
+type Props = TouchableOpacityProps & {
   title: string
   type?: TypeProps
   isLoading?: boolean

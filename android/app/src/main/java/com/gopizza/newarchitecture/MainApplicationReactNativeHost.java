@@ -1,4 +1,4 @@
-package com.GoPizza.newarchitecture;
+package com.gopizza.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.GoPizza.BuildConfig;
-import com.GoPizza.newarchitecture.components.MainComponentsRegistry;
-import com.GoPizza.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.gopizza.BuildConfig;
+import com.gopizza.newarchitecture.components.MainComponentsRegistry;
+import com.gopizza.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

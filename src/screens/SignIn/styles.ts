@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components/native";
-import { LinearGradient } from "expo-linear-gradient";
+import {LinearGradient}  from "expo-linear-gradient";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 
 
