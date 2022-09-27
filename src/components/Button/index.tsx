@@ -7,7 +7,7 @@ import { Container, Title, Load, TypeProps } from './style'
 type Props = TouchableOpacityProps & {
   title: string
   type?: TypeProps
-  isLoading?: boolean
+  isLoading?: boolean | undefined
 }
 
 export function Button({
