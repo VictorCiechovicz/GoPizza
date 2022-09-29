@@ -25,6 +25,9 @@ import * as ImagePicker from 'expo-image-picker'
 import firestore from '@react-native-firebase/firestore'
 import storage from '@react-native-firebase/storage'
 
+import {useNavigation,useRoute} from '@react-navigation/native'
+import{ ProductNavigationProps}from '@src/@types/navigation'
+
 export function Products() {
   const [image, setImage] = useState('')
   const [name, setName] = useState('')
@@ -33,6 +36,11 @@ export function Products() {
   const [priceSizeM, setPriceSizeM] = useState('')
   const [priceSizeG, setPriceSizeG] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
+  //esse useroute faz com que possamos acessar o id atraves da rota
+const route=useRoute()
+const {id} =route.params as ProductNavigationProps
+
 
   //função chama que pede a autorização do usuario para acessar biblioteca de fotos do dispositivo e depois puxa a imagem e armazana a uri.
   async function handlePickerImage() {
