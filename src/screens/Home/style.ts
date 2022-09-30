@@ -53,7 +53,7 @@ export const MenuHeader =styled.View`
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
-margin: 25px 24px 0;
+margin: 26px 24px 0;
 padding-bottom: 22px;
 border-bottom-width:1px;
 border-bottom-color: ${({theme})=>theme.COLORS.SHAPE}
@@ -81,6 +81,7 @@ ${({theme})=> css`
 font-family:${theme.FONTS.TITLE};
 color: ${theme.COLORS.SECONDARY_900};
 
+`};
 `;
 
 

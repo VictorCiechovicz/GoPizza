@@ -10,7 +10,7 @@ export function UserStackRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
       <Screen name="Home" component={Home} />
-      <Screen name="Products" component={Products} />
+      <Screen name="Product" component={Products} />
     </Navigator>
   )
 }
