@@ -114,9 +114,17 @@ export function Products() {
         //aqui vamos salvar o caminho de pastas aonde a imagem esta salva
         photo_path: reference.fullPath
       })
-      .then(() => Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
-      .catch(() =>
-        Alert.alert('Cadastro', 'não foi possível cadastrar a pizza.')
+      .then(() => {
+         Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
+         setIsLoading(false);
+    }
+      .then(() => navigation.navigate('Home'))
+      .catch(() =>{
+              setIsLoading(false);
+              Alert.alert('Cadastro', 'não foi possível cadastrar a pizza.')
+    }
+             
+             
       )
   }
 
