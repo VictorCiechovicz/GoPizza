@@ -22,10 +22,11 @@ import {
 } from './style'
 
 export function Home() {
-  const { COLORS } = useTheme()
   const [pizzas, setPizzas] = useState<ProductProps[]>([])
   const [search, setSearch] = useState('')
+
   const navigation = useNavigation()
+  const { COLORS } = useTheme()
 
   //funcao que busca uma pizza atraves do nome digitado no search
   function fetchPizzas(value: string) {
@@ -71,7 +72,7 @@ export function Home() {
   }
 
   // esse hook useFocusEffect com o useCallback faz com que quando voce retorna para a pagina home ela se renderize novamente.
-  
+
   useFocusEffect(
     useCallback(() => {
       fetchPizzas('')

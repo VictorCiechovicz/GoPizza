@@ -72,21 +72,20 @@ export function Products() {
   //Função para adionar os dados no firebase
   //O .trim() sreve para não deixar que o usuario de um espaço e tente cadastrar uma pizza sem informar todos os campos.
   async function handleAdd() {
-    if (!name.trim()) {
-      Alert.alert('Cadastro', 'Informe o nome da pizza.')
+    if (
+      !name.trim() ||
+      !description.trim() ||
+      !image ||
+      !priceSizeP ||
+      !priceSizeM ||
+      !priceSizeG
+    ) {
+      Alert.alert(
+        'Cadastro',
+        'Informe todos os dados para o cadastro da pizza.'
+      )
     }
 
-    if (!description.trim()) {
-      Alert.alert('Cadastro', 'Informe a descrição da pizza.')
-    }
-
-    if (!image) {
-      Alert.alert('Cadastro', 'Selecionae uma imagem da pizza.')
-    }
-
-    if (!priceSizeP || !priceSizeM || !priceSizeG) {
-      Alert.alert('Cadastro', 'Informe o preço de todos os tamanhos da pizza.')
-    }
     setIsLoading(true)
 
     const fileName = new Date().getTime()
@@ -105,7 +104,7 @@ export function Products() {
         //aqui em baixo vamos enviar o nome da pizza todo em minusclo em um variavel para depois fazermos uma campo de busca, fica mais facil assim.
         name_insensitive: name.toLowerCase().trim(),
         description,
-        preces_sizes: {
+        prices_sizes: {
           p: priceSizeP,
           m: priceSizeM,
           g: priceSizeG
@@ -115,9 +114,10 @@ export function Products() {
         photo_path: reference.fullPath
       })
       .then(() => Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
-      .catch(() =>
-        Alert.alert('Cadastro', 'não foi possível cadastrar a pizza.')
-      )
+      .catch(() => {
+        setIsLoading(false)
+        Alert.alert('Cadastro', 'Não foi possível cadastrar a pizza.')
+      })
   }
 
   function handleGoBack() {
