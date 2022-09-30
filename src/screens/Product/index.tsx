@@ -113,11 +113,26 @@ export function Products() {
         //aqui vamos salvar o caminho de pastas aonde a imagem esta salva
         photo_path: reference.fullPath
       })
+<<<<<<< HEAD
       .then(() => Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
       .catch(() => {
         setIsLoading(false)
         Alert.alert('Cadastro', 'Não foi possível cadastrar a pizza.')
       })
+=======
+      .then(() => {
+         Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
+         setIsLoading(false);
+    }
+      .then(() => navigation.navigate('Home'))
+      .catch(() =>{
+              setIsLoading(false);
+              Alert.alert('Cadastro', 'não foi possível cadastrar a pizza.')
+    }
+             
+             
+      )
+>>>>>>> 88f8fe7b63e9019220d9ed89a7cc30a5ff79faf9
   }
 
   function handleGoBack() {
