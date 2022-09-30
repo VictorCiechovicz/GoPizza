@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Alert, TouchableOpacity, FlatList } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useTheme } from 'styled-components'
 import happyEmoji from '@assets/happy.png'
 import firestore from '@react-native-firebase/firestore'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
 import { Search } from '@components/Search'
 import { ProductCard, ProductProps } from '@components/ProductCard'
@@ -17,7 +17,8 @@ import {
   GreetingText,
   MenuHeader,
   MenuItemNumber,
-  Title
+  Title,
+  NewProductButton
 } from './style'
 
 export function Home() {
@@ -60,16 +61,22 @@ export function Home() {
     setSearch('')
     fetchPizzas('')
   }
-
+  //funcao para entrar no item do cardapio
   function handleOpen(id: string) {
-navigation.navigate('Product',{id})
-
+    navigation.navigate('Product', { id })
+  }
+  //funcao para cadasrto de pizza
+  function handleAdd() {
+    navigation.navigate('Product', {})
   }
 
-  // esse useeffect tras todas as pizzas cadastradas
-  useEffect(() => {
-    fetchPizzas('')
-  }, [])
+  // esse hook useFocusEffect com o useCallback faz com que quando voce retorna para a pagina home ela se renderize novamente.
+  
+  useFocusEffect(
+    useCallback(() => {
+      fetchPizzas('')
+    }, [])
+  )
 
   return (
     <Container>
@@ -107,6 +114,12 @@ navigation.navigate('Product',{id})
           paddingBottom: 125,
           marginHorizontal: 24
         }}
+      />
+
+      <NewProductButton
+        title="Cadastrar Pizza"
+        type="secondary"
+        onPress={handleAdd}
       />
     </Container>
   )
