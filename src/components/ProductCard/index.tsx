@@ -1,19 +1,18 @@
 import React from 'react'
-import { useTheme } from 'styled-components/native'
 import { TouchableOpacityProps } from 'react-native'
+import { useTheme } from 'styled-components/native'
+import { Feather } from '@expo/vector-icons'
 
 import {
   Container,
   Content,
-  Description,
-  Details,
   Image,
-  Line,
+  Details,
   Name,
-  Identification
-} from './style'
-
-import { Feather } from '@expo/vector-icons'
+  Identification,
+  Description,
+  Line
+} from './styles'
 
 export type ProductProps = {
   id: string
@@ -27,7 +26,7 @@ type Props = TouchableOpacityProps & {
 }
 
 export function ProductCard({ data, ...rest }: Props) {
-  const { COLORS } = useTheme();
+  const { COLORS } = useTheme()
 
   return (
     <Container>
@@ -37,11 +36,13 @@ export function ProductCard({ data, ...rest }: Props) {
         <Details>
           <Identification>
             <Name>{data.name}</Name>
-            <Feather name="chavron-right" size={18} color={COLORS.SHAPE} />
+            <Feather name="chevron-right" size={18} color={COLORS.SHAPE} />
           </Identification>
+
           <Description>{data.description}</Description>
         </Details>
       </Content>
+
       <Line />
     </Container>
   )

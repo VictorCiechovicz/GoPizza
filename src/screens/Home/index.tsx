@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { Alert, TouchableOpacity, FlatList } from 'react-native'
+import React, { useState, useCallback } from 'react'
+import { TouchableOpacity, Alert, FlatList } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
-import { useTheme } from 'styled-components'
-import happyEmoji from '@assets/happy.png'
+import { useTheme } from 'styled-components/native'
 import firestore from '@react-native-firebase/firestore'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
+import happyEmoji from '@assets/happy.png'
+
+import { useAuth } from '@hooks/auth'
 import { Search } from '@components/Search'
 import { ProductCard, ProductProps } from '@components/ProductCard'
 
@@ -15,18 +17,19 @@ import {
   Greeting,
   GreetingEmoji,
   GreetingText,
-  MenuHeader,
-  MenuItemNumber,
   Title,
+  MenuHeader,
+  MenuItemsNumber,
   NewProductButton
-} from './style'
+} from './styles'
 
 export function Home() {
   const [pizzas, setPizzas] = useState<ProductProps[]>([])
   const [search, setSearch] = useState('')
 
-  const navigation = useNavigation()
   const { COLORS } = useTheme()
+  const navigation = useNavigation()
+  const { user, signOut } = useAuth()
 
   //funcao que busca uma pizza atraves do nome digitado no search
   function fetchPizzas(value: string) {
@@ -42,16 +45,17 @@ export function Home() {
         const data = response.docs.map(doc => {
           return {
             id: doc.id,
-            ...doc.data(),
+            ...doc.data()
           }
         }) as ProductProps[]
 
         setPizzas(data)
       })
       .catch(() =>
-        Alert.alert('Consulta', 'Nao foi possivel realizar a consulta.')
+        Alert.alert('Consulta', 'Não foi possível realizar a consulta')
       )
   }
+
   //funcao de busca
   function handleSearch() {
     fetchPizzas(search)
@@ -62,17 +66,19 @@ export function Home() {
     setSearch('')
     fetchPizzas('')
   }
+
   //funcao para entrar no item do cardapio
   function handleOpen(id: string) {
-    navigation.navigate('Product', { id })
+    const route = user?.isAdmin ? 'product' : 'order'
+    navigation.navigate(route, { id })
   }
-  //funcao para cadasrto de pizza
+
+  //funcao para cadastro de pizza
   function handleAdd() {
-    navigation.navigate('Product', {})
+    navigation.navigate('product', {})
   }
 
   // esse hook useFocusEffect com o useCallback faz com que quando voce retorna para a pagina home ela se renderize novamente.
-
   useFocusEffect(
     useCallback(() => {
       fetchPizzas('')
@@ -84,13 +90,16 @@ export function Home() {
       <Header>
         <Greeting>
           <GreetingEmoji source={happyEmoji} />
-          <GreetingText>Olá,Admin</GreetingText>
+          <GreetingText>
+            Olá,{user?.isAdmin ? 'Admin' : ' Garçom'}{' '}
+          </GreetingText>
         </Greeting>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={signOut}>
           <MaterialIcons name="logout" color={COLORS.TITLE} size={24} />
         </TouchableOpacity>
       </Header>
+
       <Search
         onChangeText={setSearch}
         value={search}
@@ -100,7 +109,7 @@ export function Home() {
 
       <MenuHeader>
         <Title>Cardápio</Title>
-        <MenuItemNumber>{pizzas.length} pizzas</MenuItemNumber>
+        <MenuItemsNumber>{pizzas.length} pizzas</MenuItemsNumber>
       </MenuHeader>
 
       <FlatList
@@ -117,11 +126,13 @@ export function Home() {
         }}
       />
 
-      <NewProductButton
-        title="Cadastrar Pizza"
-        type="secondary"
-        onPress={handleAdd}
-      />
+      {user?.isAdmin && (
+        <NewProductButton
+          title="Cadastrar Pizza"
+          type="secondary"
+          onPress={handleAdd}
+        />
+      )}
     </Container>
   )
 }

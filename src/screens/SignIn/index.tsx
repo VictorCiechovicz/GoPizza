@@ -1,6 +1,13 @@
-import React, { useState } from 'react'
-//ess key faz com que quando o teclado for acionado o que estiver na tela suba junto.
-import { KeyboardAvoidingView, Platform } from 'react-native'
+import React, { useState } from 'react';
+import { KeyboardAvoidingView, Platform } from 'react-native';
+
+import { useAuth } from '@hooks/auth';
+
+import brandImg from '@assets/brand.png';
+
+import { Input } from '@components/Input';
+import { Button } from '@components/Button';
+
 import {
   Container,
   Content,
@@ -8,36 +15,30 @@ import {
   Brand,
   ForgotPasswordButton,
   ForgotPasswordLabel
-} from './styles'
-
-import { Input } from '@components/Input'
-import { Button } from '@components/Button'
-
-import brandImg from '@assets/brand.png'
-import { useAuth } from '@hooks/auth'
+} from './styles';
 
 export function SignIn() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { singIn, isLoggin, forgotPassword } = useAuth()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { signIn, isLogging, forgotPassword } = useAuth();
 
   function handleSignIn() {
-    singIn(email, password)
+    signIn(email, password);
   }
 
   function handleForgotPassword() {
-    forgotPassword(email)
+    forgotPassword(email);
   }
 
   return (
     <Container>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      >
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <Content>
           <Brand source={brandImg} />
 
           <Title>Login</Title>
+
           <Input
             placeholder="E-mail"
             type="secondary"
@@ -45,24 +46,26 @@ export function SignIn() {
             autoCapitalize="none"
             onChangeText={setEmail}
           />
+
           <Input
             placeholder="Senha"
             type="secondary"
             secureTextEntry
             onChangeText={setPassword}
           />
+
           <ForgotPasswordButton onPress={handleForgotPassword}>
             <ForgotPasswordLabel>Esqueci minha senha</ForgotPasswordLabel>
           </ForgotPasswordButton>
 
           <Button
             title="Entrar"
-            onPress={handleSignIn}
             type="secondary"
-            isLoading={isLoggin}
+            onPress={handleSignIn}
+            isLoading={isLogging}
           />
         </Content>
       </KeyboardAvoidingView>
     </Container>
-  )
+  );
 }

@@ -1,27 +1,18 @@
-
-
-
-export type ProductNavigationProps= {
-id?: string;
+export type ProductNavigationProps = {
+  id?: string;
 }
 
-
-export type OrderNavigationProps= {
+export type OrderNavigationProps = {
   id: string;
-  }
-  
-
-
-//aqui estamos typando todas as rotas da nossa aplicacao
-export declare global{
-  namespace ReactNavigation{
-interface RootParamList{
-
-  Home:undefined;
-  Product: ProductNavigationProps;
-  Order:OrderNavigationProps;
-  Orders:undefined;
 }
 
+export declare global {
+  namespace ReactNavigation {
+    interface RootParamList {
+      home: undefined;
+      product: ProductNavigationProps;
+      order: OrderNavigationProps;
+      orders: undefined;
+    }
   }
 }

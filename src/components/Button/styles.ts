@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components/native';
 
 
-
 export type TypeProps = 'primary' | 'secondary';
 
 type ContainerProps = {
   type: TypeProps;
+
 }
+
 
 export const Container = styled.TouchableOpacity <ContainerProps>`
   flex: 1;
@@ -21,6 +22,7 @@ export const Container = styled.TouchableOpacity <ContainerProps>`
 
 export const Title = styled.Text`
   font-size: 14px;
+
   ${({ theme }) => css`
     color: ${theme.COLORS.TITLE};
     font-family: ${theme.FONTS.TEXT};
