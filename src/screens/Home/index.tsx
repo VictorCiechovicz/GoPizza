@@ -42,7 +42,7 @@ export function Home() {
         const data = response.docs.map(doc => {
           return {
             id: doc.id,
-            ...doc.data()
+            ...doc.data(),
           }
         }) as ProductProps[]
 
@@ -100,7 +100,7 @@ export function Home() {
 
       <MenuHeader>
         <Title>Cardápio</Title>
-        <MenuItemNumber>10 pizzas</MenuItemNumber>
+        <MenuItemNumber>{pizzas.length} pizzas</MenuItemNumber>
       </MenuHeader>
 
       <FlatList

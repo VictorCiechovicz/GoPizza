@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { TouchableOpacity, ScrollView, Alert, View } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
+import firestore from '@react-native-firebase/firestore'
+import storage from '@react-native-firebase/storage'
+import { useNavigation, useRoute } from '@react-navigation/native'
+
+import { ProductNavigationProps } from '@src/@types/navigation'
+
 import { ButtonBack } from '@components/ButtonBack'
 import { Photo } from '@components/Photo'
 import { Input } from '@components/Input'
@@ -19,7 +26,7 @@ import {
   InputGroupHeader,
   MaxCharacteres,
   Form
-} from './styled'
+} from './style'
 
 type PizzaResponse = ProductProps & {
   photo_path: string
@@ -29,14 +36,6 @@ type PizzaResponse = ProductProps & {
     g: string
   }
 }
-
-import * as ImagePicker from 'expo-image-picker'
-
-import firestore from '@react-native-firebase/firestore'
-import storage from '@react-native-firebase/storage'
-
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { ProductNavigationProps } from '@src/@types/navigation'
 
 export function Products() {
   const [image, setImage] = useState('')
@@ -113,26 +112,11 @@ export function Products() {
         //aqui vamos salvar o caminho de pastas aonde a imagem esta salva
         photo_path: reference.fullPath
       })
-<<<<<<< HEAD
-      .then(() => Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
+      .then(() => navigation.navigate('Home'))
       .catch(() => {
         setIsLoading(false)
         Alert.alert('Cadastro', 'Não foi possível cadastrar a pizza.')
       })
-=======
-      .then(() => {
-         Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
-         setIsLoading(false);
-    }
-      .then(() => navigation.navigate('Home'))
-      .catch(() =>{
-              setIsLoading(false);
-              Alert.alert('Cadastro', 'não foi possível cadastrar a pizza.')
-    }
-             
-             
-      )
->>>>>>> 88f8fe7b63e9019220d9ed89a7cc30a5ff79faf9
   }
 
   function handleGoBack() {
